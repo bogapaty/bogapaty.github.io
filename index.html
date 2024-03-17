@@ -24,6 +24,15 @@
   }
 </style>
 
+<script>
+  AFRAME.registerComponent('markerhandler', {
+    init: function () {
+      this.el.sceneEl.addEventListener('markerFound', () => {
+        alert('found');
+      })
+    }
+  });
+</script>
 <body style="margin : 0px; overflow: hidden;">
 <!-- minimal loader shown until image descriptors are loaded. Loading may take a while according to the device computational power -->
 <div class="arjs-loader">
@@ -41,6 +50,7 @@
     <!-- on 'url' use the path to the Image Descriptors created before. -->
     <!-- the path should end with the name without the extension e.g. if file is 'pinball.fset' the path should end with 'pinball' -->
     <a-nft
+            markerhandler
             type="nft"
             url="heliacellnft/heliacell2"
             smooth="true"
