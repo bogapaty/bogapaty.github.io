@@ -28,7 +28,7 @@
   AFRAME.registerComponent('markerhandler', {
     init: function () {
       this.el.sceneEl.addEventListener('markerFound', () => {
-        alert('found');
+       // alert('found');
       })
     }
   });
@@ -59,7 +59,7 @@
             smoothThreshold="5"
     >
         <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
-        <a-video src="helia.mp4" width="2" height="1" position="0 0 0"></a-video>
+        <a-video src="helia.mp4" width="2" height="2" position="0 0 0"></a-video>
 
     </a-nft>
     <!-- static camera that moves according to the device movemenents -->
