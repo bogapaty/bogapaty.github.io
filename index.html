@@ -19,7 +19,7 @@
                 marker.addEventListener('markerFound', function() {
                     // Alright, a marker has been found. Let's get the video element
                     var vid = document.getElementById('waterVideo');
-                    alert('found');
+
                     // Make sure that the video a-frame object is visible
                     document.querySelector('#water').setAttribute('visible', true);
 
@@ -53,8 +53,8 @@
         arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
 >
     <a-assets timeout="10000">
-        <img id="watchImage" src="heliacell.jpg">
-        <video id="waterVideo" loop="false" autoplay="false" src="helia.mp4" preload="auto"></video>
+        <img id="watchImage" src="./heliacell.jpg">
+        <video id="waterVideo" loop="false" autoplay="false" src="./helia.mp4" preload="auto"></video>
     </a-assets>
     <!-- a-nft is the anchor that defines an Image Tracking entity -->
     <!-- on 'url' use the path to the Image Descriptors created before. -->
