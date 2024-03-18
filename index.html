@@ -23,10 +23,7 @@
         embedded
         arjs="trackingMethod: best; sourceType: webcam;debugUIEnabled: false;"
 >
-    <a-assets timeout="10000">
-        <img id="watchImage" src="./5.jpg">
-        <video id="waterVideo" loop="false" autoplay="true" src="./helia.mp4" preload="auto"></video>
-    </a-assets>
+
     <!-- a-nft is the anchor that defines an Image Tracking entity -->
     <!-- on 'url' use the path to the Image Descriptors created before. -->
     <!-- the path should end with the name without the extension e.g. if file is 'pinball.fset' the path should end with 'pinball' -->
@@ -40,7 +37,7 @@
             smoothThreshold="5"
     >
         <!-- as a child of the a-nft entity, you can define the content to show. here's a GLTF model entity -->
-        <a-video id="water" src="#waterVideo" height="100" width="100" position="0 0 0" rotation="0 90 0" autoplay="false"></a-video>
+        <a-video id="water" loop="false" autoplay="true" src="./helia.mp4" preload="auto" height="100" width="100" position="0 0 0" rotation="0 90 0" autoplay="false"></a-video>
 
     </a-nft>
     <!-- static camera that moves according to the device movemenents -->
