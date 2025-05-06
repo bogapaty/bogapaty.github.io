@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Pattern Generator</title>
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+    <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .preview {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .preview img {
+            max-width: 100%;
+            height: auto;
+        }
+        .controls {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f5f5f5;
+            border-radius: 5px;
+        }
+        button {
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 10px 0;
+        }
+        button:hover {
+            background: #45a049;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 10px;
+            background: #e8f5e9;
+            border-radius: 4px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>AR Pattern Generator</h1>
+        <div class="preview">
+            <img id="imagePreview" src="heliacell.jpg" alt="HeliaCell Image">
+        </div>
+        <div class="controls">
+            <p>Click the button below to generate a pattern file for AR.js:</p>
+            <button onclick="generatePattern()">Generate Pattern</button>
+        </div>
+        <div id="result">
+            <p>Pattern generated! Download the file and save it as <code>pattern-heliacell.patt</code></p>
+            <a id="downloadLink" href="#" download="pattern-heliacell.patt">Download Pattern File</a>
+        </div>
+    </div>
+
+    <script>
+        function generatePattern() {
+            const image = document.getElementById('imagePreview');
+            const canvas = document.createElement('canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Set canvas size to match image
+            canvas.width = image.naturalWidth;
+            canvas.height = image.naturalHeight;
+            
+            // Draw image on canvas
+            ctx.drawImage(image, 0, 0);
+            
+            // Get image data
+            const imageData = ctx.getImageData(0, 0, canvas.width, canvas.height);
+            
+            // Convert to pattern file format
+            let patternData = '';
+            for (let i = 0; i < imageData.data.length; i += 4) {
+                const r = imageData.data[i];
+                const g = imageData.data[i + 1];
+                const b = imageData.data[i + 2];
+                const gray = Math.round(0.299 * r + 0.587 * g + 0.114 * b);
+                patternData += gray + ' ';
+            }
+            
+            // Create pattern file content
+            const patternFile = `# Created with AR.js Pattern Generator
+# Image: heliacell.jpg
+# Date: ${new Date().toISOString()}
+${patternData}`;
+            
+            // Create download link
+            const blob = new Blob([patternFile], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const downloadLink = document.getElementById('downloadLink');
+            downloadLink.href = url;
+            
+            // Show result
+            document.getElementById('result').style.display = 'block';
+        }
+    </script>
+</body>
+</html> 
